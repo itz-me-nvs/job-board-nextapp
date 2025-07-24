@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧑‍💼 Job Portal App (Frontend Task)
 
-## Getting Started
+This is a frontend-only Job Portal built using **Next.js 14 App Router**, **Tailwind CSS**, and **Context API (with Reducer)** for authentication and state management. The application allows users to log in, post jobs, and view listings.
 
-First, run the development server:
+---
+
+## 🚀 How to Run the Project
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/itz-me-nvs/job-board-nextapp.git
+
+# 2. Navigate into the project directory
+cd job-portal-app
+
+# 3. Install dependencies
+npm install
+
+# 4. Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 5. Open in browser
+Visit http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+✅ Features
 
-To learn more about Next.js, take a look at the following resources:
+    Login page with email/password (mock auth)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Dashboard with job posting modal
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    View all jobs globally (unauthenticated)
 
-## Deploy on Vercel
+    Context API with reducer to manage auth state
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Persisted user and jobs via localStorage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Responsive, dark-themed UI using Tailwind CSS
+
+
+🔐 Demo Credentials
+
+Email	Password
+john@example.com	123456
+(Any valid format)	(any)    
