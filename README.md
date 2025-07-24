@@ -39,6 +39,19 @@ Visit http://localhost:3000
     Responsive, dark-themed UI using Tailwind CSS
 
 
+📌 Assumptions
+
+    This is a single-user mock app using localStorage for persistence.
+
+    No backend integration; authentication and job data are stored locally.
+
+    Each user's jobs are scoped to their email ID.
+
+    Token is hardcoded and only used to simulate auth logic.
+
+    Modal form submission simulates an API with a short loading delay.    
+
+
 🔐 Demo Credentials
 
 Email	Password
