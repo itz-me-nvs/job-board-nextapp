@@ -7,12 +7,22 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+interface Job {
+  id: string
+  title: string
+  description: string
+  salary: number
+  location: string
+  email: string
+  company: string
+}
+
 export default function DashboardPage() {
- const router = useRouter()
+  const router = useRouter()
   const { state } = useAuth()
   const { user, isAuthenticated, isInitialized } = state
 
-  const [jobs, setJobs] = useState<any[]>([])
+  const [jobs, setJobs] = useState<Job[]>([])
   const [showModal, setShowModal] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -24,16 +34,16 @@ export default function DashboardPage() {
   })
 
   useEffect(() => {
-    if (!isInitialized) return
+    if (!isInitialized) return // wait for context to be initialized
 
     if (!isAuthenticated || !user) {
       router.push('/login')
       return
     }
 
-    const allJobs = JSON.parse(localStorage.getItem('jobs') || '[]')
-    setJobs(allJobs.filter((job: any) => job.email === user))
-  }, [isInitialized, showModal])
+    const allJobs: Job[] = JSON.parse(localStorage.getItem('jobs') || '[]')
+    setJobs(allJobs.filter((job) => job.email === user))
+  }, [showModal, isAuthenticated, user, isInitialized, router])
 
   const handlePostJob = (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,14 +51,14 @@ export default function DashboardPage() {
 
     setLoading(true)
 
-    const newJob = {
+    const newJob: Job = {
       id: uuidv4(),
       ...form,
       email: user,
       company: user.split('@')[0],
     }
 
-    const allJobs = JSON.parse(localStorage.getItem('jobs') || '[]')
+    const allJobs: Job[] = JSON.parse(localStorage.getItem('jobs') || '[]')
     localStorage.setItem('jobs', JSON.stringify([...allJobs, newJob]))
 
     setTimeout(() => {
@@ -57,15 +67,6 @@ export default function DashboardPage() {
       setForm({ title: '', description: '', salary: 0, location: '' })
       alert('Job posted successfully!')
     }, 1000)
-  }
-
-
-  if (!isInitialized) {
-    return (
-      <main className="flex justify-center items-center min-h-screen bg-black text-white">
-        <Loader />
-      </main>
-    )
   }
 
   return (
@@ -92,7 +93,9 @@ export default function DashboardPage() {
                 className="bg-gray-800 text-white p-4 rounded border border-gray-700 hover:shadow-lg transition"
               >
                 <h2 className="text-lg font-semibold">{job.title}</h2>
-                <p className="text-gray-300">{job.location} | ₹ {job.salary}</p>
+                <p className="text-gray-300">
+                  {job.location} | ₹ {job.salary}
+                </p>
               </div>
             ))}
           </div>
@@ -121,7 +124,9 @@ export default function DashboardPage() {
                   className="w-full bg-gray-800 text-white border border-gray-600 px-3 py-2 rounded placeholder-gray-400"
                   placeholder="Description"
                   value={form.description}
-                  onChange={(e) => setForm({ ...form, description: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, description: e.target.value })
+                  }
                   required
                 />
                 <input
@@ -129,7 +134,9 @@ export default function DashboardPage() {
                   className="w-full bg-gray-800 text-white border border-gray-600 px-3 py-2 rounded placeholder-gray-400"
                   placeholder="Salary"
                   value={form.salary}
-                  onChange={(e) => setForm({ ...form, salary: Number(e.target.value) })}
+                  onChange={(e) =>
+                    setForm({ ...form, salary: Number(e.target.value) })
+                  }
                   required
                   min={1}
                 />
@@ -137,7 +144,9 @@ export default function DashboardPage() {
                   className="w-full bg-gray-800 text-white border border-gray-600 px-3 py-2 rounded placeholder-gray-400"
                   placeholder="Location"
                   value={form.location}
-                  onChange={(e) => setForm({ ...form, location: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, location: e.target.value })
+                  }
                   required
                 />
 
